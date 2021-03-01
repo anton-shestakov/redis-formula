@@ -49,6 +49,8 @@ redis_config:
   file.managed:
     - name: {{ r.cfg_name }}
     - template: jinja
+    - context:
+      redis_settings: {{ r|tojson }}
     {% if r.source_path is not defined %}
     - source: salt://redis/files/redis-{{ r.cfg_version }}.conf.jinja
     {% else %}
